@@ -2,7 +2,7 @@
 
 Repository for the paper [Blockchain-based Shared Additive Manufacturing]()
 
-**An online demo is available [here]()**
+**An online demo is available [here](https://colab.research.google.com/drive/1w79YsUnnRT8T7E8NzpqcPan2p8F8aWKn?usp=sharing)**
 
 ## Installation
 
