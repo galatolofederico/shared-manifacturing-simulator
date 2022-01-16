@@ -12,7 +12,7 @@ parser.add_argument("--dataset", type=str, default="./dataset/italy.xlsx")
 parser.add_argument("--output", type=str, default="scenarios/italy.yaml")
 parser.add_argument("--quantity-mu-formula", type=str, default="{zone_machines_count}")
 parser.add_argument("--quantity-std-formula", type=str, default="{zone_machines_count}")
-parser.add_argument("--probability-formula", type=str, default="2/100")
+parser.add_argument("--probability", type=float, default=0.01)
 parser.add_argument("--duration-mu", type=float, default=60)
 parser.add_argument("--duration-std", type=float, default=5)
 parser.add_argument("--max-delivery-delta-formula", type=str, default="24*5+{duration}")
@@ -77,8 +77,8 @@ for zone in zones:
             std=atleast_1(eval(args.quantity_std_formula.format(zone_machines_count=zone_machines_count)))
         ),
         probability=dict(
-            type="formula",
-            value=args.probability_formula
+            type="constant",
+            value=args.probability
         ),
         duration=dict(
             type="normal",
