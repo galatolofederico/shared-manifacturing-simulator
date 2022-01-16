@@ -1,0 +1,6 @@
+/env
+__pycache__/
+
+/results
+/scenarios/*
+!/scenarios/test.yaml

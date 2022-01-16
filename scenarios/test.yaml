@@ -1,0 +1,95 @@
+zones:
+  - name: ABZone
+    nodes: [A, B]
+    customers: [ABCustomer]
+  - name: CDZone
+    nodes: [C, D]
+    customers: [CDCustomer]
+  - name: GlobalZone
+    nodes: [A, B, C, D]
+    customers: [ABCustomer, CDCustomer]
+
+demands:
+  - type: ZoneDemand
+    name: ABDemand
+    zone: ABZone
+    quantity:
+      - type: constant
+        value: 2
+    probability:
+      - type: constant
+        value: 0.7
+    duration:
+      - type: normal
+        cast: positive_integer
+        mu: 10
+        std: 3
+    max_delivery_delta:
+      - type: formula
+        cast: positive_integer
+        value: "2*{duration}"
+
+nodes:
+  - name: A
+    capacity:
+      - type: constant
+        value: 5
+    zones: [ABZone, GlobalZone]
+    neighbours: [B, C, D]
+    logistics:
+      - zone: ABZone
+        cost: 
+          - type: constant
+            value: 1
+      - zone: GlobalZone
+        cost:
+          - type: constant
+            value: 3
+
+  - name: B
+    capacity:
+      - type: constant
+        value: 5
+    zones: [ABZone, GlobalZone]
+    neighbours: [A, C, D]
+    logistics:
+      - zone: ABZone
+        cost: 
+          - type: constant
+            value: 1
+      - zone: GlobalZone
+        cost:
+          - type: constant
+            value: 3
+
+  - name: C
+    capacity:
+      - type: constant
+        value: 5
+    zones: [CDZone, GlobalZone]
+    neighbours: [A, B, D]
+    logistics:
+      - zone: CDZone
+        cost: 
+          - type: constant
+            value: 1
+      - zone: GlobalZone
+        cost:
+          - type: constant
+            value: 3
+
+  - name: D
+    capacity:
+      - type: constant
+        value: 5
+    zones: [CDZone, GlobalZone]
+    neighbours: [A, B, C]
+    logistics:
+      - zone: CDZone
+        cost: 
+          - type: constant
+            value: 1
+      - zone: GlobalZone
+        cost:
+          - type: constant
+            value: 3
